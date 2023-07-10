@@ -1,14 +1,19 @@
 .DEFAULT_GOAL := help
 
+# This points to the repository root directory
+repo_root = $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+
 .PHONY: run-server
 run-server: ## Run the server passing the arguments
 	@echo "> Running the server ..."
 	go run cmd/server/main.go $(ARGS)
 
 .PHONY: test
-test: ## Run tests
+test: ## Run tests with coverage
 	@echo "> Testing..."
-	go test -v ./...
+	go clean --testcache
+	go test -v ./... -coverprofile=$(repo_root)/test_coverage.out &&\
+	echo "total coverage: $$(go tool cover -func=$(repo_root)/test_coverage.out | grep total: | awk '{ print $$3}')"\
 
 .PHONY: tidy
 tidy: ## Clean and format Go code
