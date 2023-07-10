@@ -11,6 +11,7 @@ import (
 	qstore "github.com/daniel-orlov/quotes-server/internal/storage/quotes"
 	httptransport "github.com/daniel-orlov/quotes-server/internal/transport/http"
 	"github.com/daniel-orlov/quotes-server/internal/transport/http/quotes"
+	"github.com/daniel-orlov/quotes-server/internal/transport/middleware/ratelimiter"
 	"github.com/daniel-orlov/quotes-server/pkg/logging"
 )
 
@@ -33,8 +34,17 @@ func main() {
 	// Initialize the quote handler.
 	quotesHandler := quotes.NewHandler(logger, quoteService)
 
+	// Initialize middlewares.
+	// Rate limiter middleware.
+	ratelimiterMW := ratelimiter.New(logger,
+		&ratelimiter.Config{
+			Rate:  cfg.Server.Middlewares.Ratelimiter.Rate,
+			Limit: cfg.Server.Middlewares.Ratelimiter.Limit,
+			Key:   cfg.Server.Middlewares.Ratelimiter.Key,
+		})
+
 	// Initialize the Gin router.
-	router := httptransport.NewRouter(quotesHandler)
+	router := httptransport.NewRouter(quotesHandler, ratelimiterMW.Use())
 
 	// Start the server and listen on port 8080.
 	err = router.Run(fmt.Sprintf(":%d", cfg.Server.Port))

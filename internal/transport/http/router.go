@@ -7,12 +7,15 @@ import (
 )
 
 // NewRouter creates a new HTTP router.
-func NewRouter(quotesHandler *quotes.Handler) *gin.Engine {
+// It accepts a quotes handler and a list of global middlewares, which will be applied to all routes.
+// TODO: refactor to accept a map of handlers to middleware lists for extensibility.
+func NewRouter(quotesHandler *quotes.Handler, globalMWs ...gin.HandlerFunc) *gin.Engine {
 	// Initialize Gin router
 	r := gin.Default()
 
 	// Initialize an API version group
-	v1 := r.Group("/v1")
+	// Add global middlewares
+	v1 := r.Group("/v1", globalMWs...)
 
 	{
 		// Initialize quotes group

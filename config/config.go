@@ -4,6 +4,8 @@ import (
 	"fmt"
 
 	"github.com/kelseyhightower/envconfig"
+
+	"github.com/daniel-orlov/quotes-server/internal/transport/middleware/ratelimiter"
 )
 
 // Config is the main configuration of the application.
@@ -20,6 +22,18 @@ type Config struct {
 	Server struct {
 		// Port is the port to listen on.
 		Port int `envconfig:"SERVER_PORT" default:"8080"`
+		// Meddlewares is the configuration for the middlewares.
+		Middlewares struct {
+			// Ratelimiter is the configuration for the ratelimiter middleware.
+			Ratelimiter struct {
+				// Rate is the rate at which requests are allowed.
+				Rate ratelimiter.Rate `envconfig:"RATELIMITER_RATE" default:"second"`
+				// Limit is the maximum number of requests allowed.
+				Limit uint `envconfig:"RATELIMITER_LIMIT" default:"5"`
+				// Key is the key to use for the ratelimiter.
+				Key ratelimiter.Key `envconfig:"RATELIMITER_KEY" default:"client_ip"`
+			}
+		}
 	}
 }
 
