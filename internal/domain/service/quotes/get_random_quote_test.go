@@ -43,7 +43,7 @@ func TestService_GetRandomQuote_Success(t *testing.T) {
 	assert.NoError(t, err)
 
 	// Assert a random quote is returned.
-	assert.Contains(t, quoteList, quote)
+	assert.Contains(t, quoteList, *quote)
 }
 
 func TestService_GetRandomQuote_StorageError(t *testing.T) {
@@ -60,7 +60,7 @@ func TestService_GetRandomQuote_StorageError(t *testing.T) {
 	quote, err := service.GetRandomQuote(context.TODO())
 
 	// Assert the error is returned.
-	assert.Equal(t, storageError, err)
+	assert.ErrorIs(t, err, storageError)
 
 	// Assert the quote is nil.
 	assert.Nil(t, quote)
