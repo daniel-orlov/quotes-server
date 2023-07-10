@@ -27,9 +27,9 @@ func TestNewRouter_GET_quote(t *testing.T) {
 	}
 
 	// Create a handler
-	quoteHandler := quotes.NewHandler(mocks.NewMockQuoteService(map[ulid.ULID]model.Quote{
+	quoteHandler := quotes.NewHandler(zap.NewNop(), mocks.NewMockQuoteService(map[ulid.ULID]model.Quote{
 		quoteInService.ID: quoteInService,
-	}, nil), zap.NewNop())
+	}, nil))
 
 	// Create a router
 	r := httptransport.NewRouter(quoteHandler)

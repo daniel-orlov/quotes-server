@@ -42,7 +42,7 @@ func TestHandler_GetQuote_Success(t *testing.T) {
 	)
 
 	// Creating a handler
-	quoteHandler := quotes.NewHandler(quoteService, zap.NewNop())
+	quoteHandler := quotes.NewHandler(zap.NewNop(), quoteService)
 
 	// Creating a variable to store the endpoint of the request
 	endpoint := "/v1/quotes"
@@ -105,7 +105,7 @@ func TestHandler_GetQuote_Internal_Error(t *testing.T) {
 	quoteService := mocks.NewMockQuoteService(nil, errors.New("internal error"))
 
 	// Creating a handler
-	quoteHandler := quotes.NewHandler(quoteService, zap.NewNop())
+	quoteHandler := quotes.NewHandler(zap.NewNop(), quoteService)
 
 	// Creating a variable to store the endpoint of the request
 	endpoint := "/v1/quotes"
@@ -159,7 +159,7 @@ func TestHandler_GetQuote_Not_Found_Error(t *testing.T) {
 	quoteService := mocks.NewMockQuoteService(map[ulid.ULID]model.Quote{}, nil)
 
 	// Creating a handler
-	quoteHandler := quotes.NewHandler(quoteService, zap.NewNop())
+	quoteHandler := quotes.NewHandler(zap.NewNop(), quoteService)
 
 	// Creating a variable to store the endpoint of the request
 	endpoint := "/v1/quotes"

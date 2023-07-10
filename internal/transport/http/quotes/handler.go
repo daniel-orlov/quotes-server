@@ -22,7 +22,7 @@ type Handler struct {
 // ResourceEndpoint is the endpoint for the /quotes resource.
 const ResourceEndpoint = "/quotes"
 
-func NewHandler(service Service, logger *zap.Logger) *Handler {
+func NewHandler(logger *zap.Logger, service Service) *Handler {
 	return &Handler{
 		logger:  logger,
 		service: service,
