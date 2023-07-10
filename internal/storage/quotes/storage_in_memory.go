@@ -2,7 +2,6 @@ package quotes
 
 import (
 	"context"
-	"errors"
 
 	"go.uber.org/zap"
 
@@ -21,6 +20,20 @@ func NewStorageInMemory(logger *zap.Logger, db []model.Quote) *StorageInMemory {
 }
 
 // GetQuoteList returns a list of quotes.
-func (s *StorageInMemory) GetQuoteList(_ context.Context) ([]model.Quote, error) {
-	return nil, errors.New("not implemented")
+func (s *StorageInMemory) GetQuoteList(ctx context.Context) ([]model.Quote, error) {
+	// Logging the call
+	s.logger.Debug("getting quote list")
+
+	// Checking if the context is canceled
+	if ctx.Err() != nil {
+		return nil, ctx.Err()
+	}
+
+	// checking if the db is empty
+	if len(s.db) == 0 {
+		return nil, ErrDBEmpty
+	}
+
+	// returning the db and nil as the error
+	return s.db, nil
 }
