@@ -1,8 +1,12 @@
 package main
 
 import (
+	"fmt"
+	"log"
+
 	"go.uber.org/zap"
 
+	"github.com/daniel-orlov/quotes-server/config"
 	qsvc "github.com/daniel-orlov/quotes-server/internal/domain/service/quotes"
 	qstore "github.com/daniel-orlov/quotes-server/internal/storage/quotes"
 	httptransport "github.com/daniel-orlov/quotes-server/internal/transport/http"
@@ -11,8 +15,14 @@ import (
 )
 
 func main() {
-	// Create a new logger
-	logger := logging.Logger("json", "debug")
+	// Parse config and check for errors.
+	cfg, err := config.NewConfig()
+	if err != nil {
+		log.Fatalf("parsing config: %v", err)
+	}
+
+	// Create a new logger.
+	logger := logging.Logger(cfg.Logging.Format, cfg.Logging.Level)
 
 	// Initialize the quote storage.
 	quotesStorage := qstore.NewStorageInMemory(logger, quoteDB)
@@ -27,7 +37,7 @@ func main() {
 	router := httptransport.NewRouter(quotesHandler)
 
 	// Start the server and listen on port 8080.
-	err := router.Run(":8080")
+	err = router.Run(fmt.Sprintf(":%d", cfg.Server.Port))
 	if err != nil {
 		logger.Fatal("running server failed", zap.Error(err))
 	}
