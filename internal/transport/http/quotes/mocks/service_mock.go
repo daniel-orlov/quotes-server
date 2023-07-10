@@ -45,6 +45,7 @@ func (m *MockQuoteService) GetRandomQuote(_ context.Context) (*model.Quote, erro
 		return nil, nil
 	}
 
-	// Since the order of map iteration is random, this is a random quote
+	// Since the order of map iteration is not guaranteed, for the sake of simplicity,
+	// we could treat the first quote as a random one
 	return &quoteList[0], nil
 }
