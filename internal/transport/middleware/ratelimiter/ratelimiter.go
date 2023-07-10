@@ -9,12 +9,14 @@ import (
 	"go.uber.org/zap"
 )
 
+// RateLimiter is a middleware that limits the number of requests a client can make.
 type RateLimiter struct {
 	logger *zap.Logger
 	cfg    *Config
 	store  ratelimit.Store
 }
 
+// New creates a new rate limiter middleware instance.
 func New(logger *zap.Logger, cfg *Config) *RateLimiter {
 	return &RateLimiter{
 		logger: logger,
