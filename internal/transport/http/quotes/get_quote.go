@@ -25,6 +25,14 @@ func (h *Handler) GetQuote(c *gin.Context) {
 		return
 	}
 
+	if quote == nil {
+		// Return a generic error to the client.
+		c.AbortWithStatusJSON(http.StatusNotFound, model.Quote{})
+
+		// Exit the function.
+		return
+	}
+
 	// Return the quote to the client.
 	c.JSON(http.StatusOK, quote)
 }

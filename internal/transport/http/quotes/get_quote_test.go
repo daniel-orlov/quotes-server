@@ -146,3 +146,57 @@ func TestHandler_GetQuote_Internal_Error(t *testing.T) {
 	// Asserting the quote id is empty
 	assert.Empty(t, quote.ID)
 }
+
+func TestHandler_GetQuote_Not_Found_Error(t *testing.T) {
+	// Setting the gin to test mode
+	gin.SetMode(gin.TestMode)
+	// Creating a recorder to record the response
+	w := httptest.NewRecorder()
+	// Creating a context to use in the request
+	c, r := gin.CreateTestContext(w)
+
+	// Creating a mock service
+	quoteService := mocks.NewMockQuoteService(map[ulid.ULID]model.Quote{}, nil)
+
+	// Creating a handler
+	quoteHandler := quotes.NewHandler(quoteService, zap.NewNop())
+
+	// Creating a variable to store the endpoint of the request
+	endpoint := "/v1/quotes"
+
+	// Registering the endpoint handler to the router
+	r.GET(endpoint, quoteHandler.GetQuote)
+
+	// Creating a request
+	req, err := http.NewRequest(http.MethodGet, endpoint, nil)
+
+	// Requiring no error
+	require.NoError(t, err)
+
+	// Serving the request
+	r.ServeHTTP(c.Writer, req)
+
+	// Asserting the response code
+	assert.Equal(t, http.StatusNotFound, w.Code)
+
+	// Creating a variable to store the response body
+	var quote model.Quote
+
+	// Unmarshalling the response body into the quote variable
+	err = json.Unmarshal(w.Body.Bytes(), &quote)
+
+	// Asserting the error is nil
+	assert.NoError(t, err)
+
+	// Asserting the quote is not nil
+	assert.NotNil(t, quote)
+
+	// Asserting the quote text is empty
+	assert.Empty(t, quote.Text)
+
+	// Asserting the quote author is empty
+	assert.Empty(t, quote.Author)
+
+	// Asserting the quote id is empty
+	assert.Empty(t, quote.ID)
+}
