@@ -24,9 +24,9 @@ func TestNewConfig_UsingDefaults(t *testing.T) {
 	assert.Equal(t, "debug", cfg.Logging.Level)
 	assert.Equal(t, "console", cfg.Logging.Format)
 	assert.Equal(t, 8080, cfg.Server.Port)
-	assert.Equal(t, "second", cfg.Server.Middlewares.Ratelimiter.Rate)
-	assert.Equal(t, 5, cfg.Server.Middlewares.Ratelimiter.Limit)
-	assert.Equal(t, "client_ip", cfg.Server.Middlewares.Ratelimiter.Key)
+	assert.Equal(t, "second", cfg.Server.Middlewares.Ratelimiter.Rate.String())
+	assert.Equal(t, uint(5), cfg.Server.Middlewares.Ratelimiter.Limit)
+	assert.Equal(t, "client_ip", cfg.Server.Middlewares.Ratelimiter.Key.String())
 }
 
 func TestNewConfig_UsingEnvironmentVariables(t *testing.T) {
@@ -55,9 +55,9 @@ func TestNewConfig_UsingEnvironmentVariables(t *testing.T) {
 	assert.Equal(t, "info", cfg.Logging.Level)
 	assert.Equal(t, "json", cfg.Logging.Format)
 	assert.Equal(t, 80, cfg.Server.Port)
-	assert.Equal(t, "minute", cfg.Server.Middlewares.Ratelimiter.Rate)
-	assert.Equal(t, 10, cfg.Server.Middlewares.Ratelimiter.Limit)
-	assert.Equal(t, "client_id", cfg.Server.Middlewares.Ratelimiter.Key)
+	assert.Equal(t, "minute", cfg.Server.Middlewares.Ratelimiter.Rate.String())
+	assert.Equal(t, uint(10), cfg.Server.Middlewares.Ratelimiter.Limit)
+	assert.Equal(t, "client_id", cfg.Server.Middlewares.Ratelimiter.Key.String())
 }
 
 // setEnvVars sets the given environment variables.
