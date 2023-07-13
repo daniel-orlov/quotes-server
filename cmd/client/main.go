@@ -20,6 +20,9 @@ func main() {
 	// Create a new logger.
 	logger := logging.Logger(cfg.Logging.Format, cfg.Logging.Level)
 
+	// Log the config.
+	logger.Debug("config", zap.Any("config", cfg))
+
 	// Sync the logger before exiting.
 	defer func(logger *zap.Logger) {
 		err = logger.Sync()
@@ -33,6 +36,9 @@ func main() {
 
 	// Create a new client.
 	quotesClient := client.NewClient(logger, cfg, httpClient)
+
+	// Log successful client creation.
+	logger.Info("client created")
 
 	// Run the client in a loop.
 	quotesClient.Run()

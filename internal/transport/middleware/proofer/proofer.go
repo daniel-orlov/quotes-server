@@ -24,8 +24,11 @@ type Proofer struct {
 	svc    PoWService
 }
 
-// New creates a new Proofer middleware.
+// New creates new Proofer middleware.
 func New(logger *zap.Logger, cfg *Config, svc PoWService) *Proofer {
+	// Logging the call
+	logger.Debug("creating a new proofer middleware")
+
 	return &Proofer{logger: logger, cfg: cfg, svc: svc}
 }
 

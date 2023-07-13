@@ -23,6 +23,9 @@ type Handler struct {
 const ResourceEndpoint = "/quotes"
 
 func NewHandler(logger *zap.Logger, service Service) *Handler {
+	// Logging the call
+	logger.Debug("creating a new quotes handler")
+
 	return &Handler{
 		logger:  logger,
 		service: service,

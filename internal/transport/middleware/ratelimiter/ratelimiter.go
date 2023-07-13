@@ -18,6 +18,9 @@ type RateLimiter struct {
 
 // New creates a new rate limiter middleware instance.
 func New(logger *zap.Logger, cfg *Config) *RateLimiter {
+	// Logging the call
+	logger.Debug("creating a new rate limiter middleware")
+
 	return &RateLimiter{
 		logger: logger,
 		cfg:    cfg,

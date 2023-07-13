@@ -36,6 +36,9 @@ func main() {
 		}
 	}(logger)
 
+	// Log the config.
+	logger.Debug("config", zap.Any("config", cfg))
+
 	//--------------------------------------------------------------//
 	//  				    	STORAGES                        	//
 	//--------------------------------------------------------------//
@@ -43,6 +46,9 @@ func main() {
 	quoteStorage := qstore.NewStorageInMemory(logger, qstore.GetQuotes())
 	// Initialize the challenge storage.
 	challengeStorage := cstore.NewStorageInMemory(logger)
+
+	// Log successful storages creation.
+	logger.Info("storages created")
 
 	//--------------------------------------------------------------//
 	//  				    	SERVICES                        	//
@@ -52,11 +58,17 @@ func main() {
 	// Proof-of-work service.
 	powService := pow.NewService(logger, challengeStorage)
 
+	// Log successful services creation.
+	logger.Info("services created")
+
 	//--------------------------------------------------------------//
 	//  				    	HANDLERS                        	//
 	//--------------------------------------------------------------//
 	// Initialize the quote handler.
 	quotesHandler := quotes.NewHandler(logger, quoteService)
+
+	// Log successful handlers creation.
+	logger.Info("handlers created")
 
 	//--------------------------------------------------------------//
 	//  				    	MIDDLEWARES                     	//
@@ -78,8 +90,17 @@ func main() {
 		powService,
 	)
 
+	// Log successful middlewares creation.
+	logger.Info("middlewares created")
+
+	//--------------------------------------------------------------//
+	//  				    	SERVER                        		//
+	//--------------------------------------------------------------//
 	// Initialize the Gin router.
 	router := httptransport.NewRouter(quotesHandler, ratelimiterMW.Use(), prooferMW.Use())
+
+	// Log successful router creation.
+	logger.Info("router created")
 
 	// Start the server and listen on port 8080.
 	err = router.Run(fmt.Sprintf(":%d", cfg.Server.Port))

@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"math/rand"
 
+	"go.uber.org/zap"
+
 	"github.com/daniel-orlov/quotes-server/internal/domain/model"
 )
 
@@ -41,5 +43,11 @@ func (s *Service) GetRandomQuote(ctx context.Context) (*model.Quote, error) {
 
 	// We use the random index to get a random quote from the cache.
 	// We return the quote and nil as the error.
-	return &s.cache[randIndex], nil
+	quote := s.cache[randIndex]
+
+	// Logging the result.
+	s.logger.Debug("got random quote", zap.String("quote", quote.Text))
+
+	// Returning the quote and nil as the error.
+	return &quote, nil
 }

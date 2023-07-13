@@ -22,5 +22,8 @@ type Service struct {
 
 // NewService creates a new quote service.
 func NewService(logger *zap.Logger, storage Storage) *Service {
+	// Logging the call
+	logger.Debug("creating a new quote service")
+
 	return &Service{logger: logger, storage: storage}
 }

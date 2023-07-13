@@ -11,6 +11,9 @@ import (
 
 // GetQuote handles the request for getting a quote.
 func (h *Handler) GetQuote(c *gin.Context) {
+	// Logging the call
+	h.logger.Debug("handling the request for getting a quote")
+
 	// Call the service.
 	quote, err := h.service.GetRandomQuote(c.Request.Context())
 	// Handle the error.

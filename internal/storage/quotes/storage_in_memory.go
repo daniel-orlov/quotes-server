@@ -16,6 +16,9 @@ type StorageInMemory struct {
 
 // NewStorageInMemory creates a new quote storage in memory.
 func NewStorageInMemory(logger *zap.Logger, db []model.Quote) *StorageInMemory {
+	// Logging the call
+	logger.Debug("creating a new quote storage in memory")
+
 	return &StorageInMemory{logger: logger, db: db}
 }
 

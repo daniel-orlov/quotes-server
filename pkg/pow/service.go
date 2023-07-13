@@ -25,5 +25,8 @@ type Service struct {
 
 // NewService creates a new PoW service.
 func NewService(logger *zap.Logger, store ChallengeStore) *Service {
+	// Logging the call
+	logger.Debug("creating a new PoW service")
+
 	return &Service{logger: logger, Store: store}
 }
