@@ -78,7 +78,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          images: danielorlov/quotes-server
+          images: danielorlov/quotes/server
           flavor: latest=true
           tags: |
             type=ref,event=branch
@@ -111,7 +111,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          images: danielorlov/quotes-client
+          images: danielorlov/quotes/client
           flavor: latest=true
           tags: |
             type=ref,event=branch
