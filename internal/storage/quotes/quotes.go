@@ -141,3 +141,9 @@ var quoteDB = []model.Quote{
 		Author: "Thomas J. Watson",
 	},
 }
+
+// GetQuotes returns all hardcoded quotes.
+// This is done to avoid referencing a global variable directly.
+func GetQuotes() []model.Quote {
+	return quoteDB
+}

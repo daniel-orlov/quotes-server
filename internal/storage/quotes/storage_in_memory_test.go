@@ -57,3 +57,24 @@ func TestStorageInMemory_GetQuoteList_Empty(t *testing.T) {
 	// Assert an empty quote list is returned.
 	assert.Empty(t, quoteListActual)
 }
+
+func TestStorageInMemory_GetQuoteList_CanceledContext(t *testing.T) {
+	// Prepare test data.
+	quoteList := []model.Quote{}
+
+	// Create a quote storage.
+	storage := quotes.NewStorageInMemory(zap.NewNop(), quoteList)
+
+	// Create a canceled context.
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+
+	// Call the method under test.
+	quoteListActual, err := storage.GetQuoteList(ctx)
+
+	// Assert error is returned.
+	assert.ErrorIs(t, err, context.Canceled)
+
+	// Assert an empty quote list is returned.
+	assert.Empty(t, quoteListActual)
+}
