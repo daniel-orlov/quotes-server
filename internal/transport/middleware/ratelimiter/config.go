@@ -26,6 +26,11 @@ const (
 	ClientIP Key = "client_ip"
 )
 
+// String returns a string representation of the key.
+func (k Key) String() string {
+	return string(k)
+}
+
 // Rate is the type used to specify the rate at which requests are allowed.
 type Rate string
 
@@ -35,6 +40,11 @@ const (
 	// Minute is the rate at which requests are allowed per minute.
 	Minute Rate = "minute"
 )
+
+// String returns a string representation of the rate.
+func (r Rate) String() string {
+	return string(r)
+}
 
 // parseRate parses the rate string and returns the time.Duration equivalent.
 func (mw *RateLimiter) parseRate(rate Rate) time.Duration {
