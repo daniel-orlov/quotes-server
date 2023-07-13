@@ -14,16 +14,13 @@ RUN go mod download
 COPY . .
 
 # Build the Go application
-RUN CGO_ENABLED=0 GOOS=linux go build -o server ./cmd/server/main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -o client ./cmd/client/main.go
 
 # Use a distroless image as the final base image
 FROM gcr.io/distroless/static:nonroot
 
 # Copy the binary from the build stage to the final image
-COPY --from=build /app/server /app/server
-
-# Expose any necessary ports
-EXPOSE 8080
+COPY --from=build /app/client /app/client
 
 # Set the entry point for the container
-ENTRYPOINT ["/app/server"]
+ENTRYPOINT ["/app/client"]

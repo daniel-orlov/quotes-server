@@ -38,7 +38,7 @@ func TestNewRouter_GET_quote(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	// Create a request
-	req, err := http.NewRequest(http.MethodGet, fmt.Sprintf("/v1%s", quotes.ResourceEndpoint), nil)
+	req, err := http.NewRequest(http.MethodGet, fmt.Sprintf("/v1%s/random", quotes.ResourceEndpoint), nil)
 
 	// Require no error
 	require.NoError(t, err)

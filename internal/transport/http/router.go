@@ -22,7 +22,7 @@ func NewRouter(quotesHandler *quotes.Handler, globalMWs ...gin.HandlerFunc) *gin
 		quoteGroup := v1.Group(quotes.ResourceEndpoint)
 		{
 			// Initialize quotes endpoints
-			quoteGroup.GET("", quotesHandler.GetQuote)
+			quoteGroup.GET("/random", quotesHandler.GetQuote)
 		}
 	}
 
