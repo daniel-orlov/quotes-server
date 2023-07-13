@@ -18,7 +18,7 @@ import (
 func (c *Client) Run() {
 	// Create the endpoint URL
 	endpoint := fmt.Sprintf(
-		"http://%s:%d/%s",
+		"http://%s:%d%s",
 		c.cfg.Connection.ServerHost,
 		c.cfg.Connection.ServerPort,
 		c.cfg.Connection.RequestPath,
