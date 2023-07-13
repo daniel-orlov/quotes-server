@@ -33,6 +33,13 @@ type Config struct {
 				// Key is the key to use for the ratelimiter.
 				Key ratelimiter.Key `envconfig:"RATELIMITER_KEY" default:"client_ip"`
 			}
+			// Proofer is the configuration for the proofer middleware.
+			Proofer struct {
+				// ChallengeDifficulty is the difficulty of the proof of work challenge.
+				ChallengeDifficulty int `envconfig:"CHALLENGE_DIFFICULTY" default:"10"`
+				// SaltLength is the length of the salt.
+				SaltLength int `envconfig:"SALT_LENGTH" default:"8"`
+			}
 		}
 	}
 }
