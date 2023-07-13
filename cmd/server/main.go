@@ -28,6 +28,14 @@ func main() {
 	// Create a new logger.
 	logger := logging.Logger(cfg.Logging.Format, cfg.Logging.Level)
 
+	// Sync the logger before exiting.
+	defer func(logger *zap.Logger) {
+		err = logger.Sync()
+		if err != nil {
+			log.Fatalf("syncing logger: %v", err)
+		}
+	}(logger)
+
 	//--------------------------------------------------------------//
 	//  				    	STORAGES                        	//
 	//--------------------------------------------------------------//

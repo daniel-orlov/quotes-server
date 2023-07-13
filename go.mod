@@ -8,6 +8,7 @@ require (
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/oklog/ulid/v2 v2.1.0
 	github.com/stretchr/testify v1.8.3
+	github.com/ybbus/httpretry v1.0.2
 	go.uber.org/zap v1.24.0
 )
 
