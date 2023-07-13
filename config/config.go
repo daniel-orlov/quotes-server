@@ -36,7 +36,7 @@ type Config struct {
 			// Proofer is the configuration for the proofer middleware.
 			Proofer struct {
 				// ChallengeDifficulty is the difficulty of the proof of work challenge.
-				ChallengeDifficulty int `envconfig:"CHALLENGE_DIFFICULTY" default:"10"`
+				ChallengeDifficulty int `envconfig:"CHALLENGE_DIFFICULTY" default:"20"`
 				// SaltLength is the length of the salt.
 				SaltLength int `envconfig:"SALT_LENGTH" default:"8"`
 			}
