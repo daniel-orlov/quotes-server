@@ -65,3 +65,23 @@ func TestService_GetRandomQuote_StorageError(t *testing.T) {
 	// Assert the quote is nil.
 	assert.Nil(t, quote)
 }
+
+func TestService_GetRandomQuote_StorageEmpty(t *testing.T) {
+	// Prepare test data.
+	quoteList := []model.Quote{}
+
+	// Create a mock for quote storage.
+	storageMock := mocks.NewMockQuoteStorage(quoteList, nil)
+
+	// Create a quote service.
+	service := quotes.NewService(zap.NewNop(), storageMock)
+
+	// Call the method under test.
+	quote, err := service.GetRandomQuote(context.TODO())
+
+	// Assert the error is returned.
+	assert.Error(t, err, "expected an error")
+
+	// Assert the quote is nil.
+	assert.Nil(t, quote)
+}
