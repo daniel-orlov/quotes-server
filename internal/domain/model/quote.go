@@ -1,3 +1,4 @@
+// Package model contains the domain models of the application.
 package model
 
 import "github.com/oklog/ulid/v2"

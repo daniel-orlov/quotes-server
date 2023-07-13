@@ -1,3 +1,9 @@
+// Package hashcash contains the hashcash v1 implementation.
+//
+// Hashcash is a proof-of-work system used to limit email spam and denial-of-service attacks.
+// Read more:
+// - https://en.wikipedia.org/wiki/Hashcash
+// - https://www.hashcash.org/
 package hashcash
 
 import (
@@ -12,9 +18,6 @@ import (
 )
 
 // Hashcash is a representation of a hashcash version 1.
-// Read more:
-// - https://en.wikipedia.org/wiki/Hashcash
-// - https://www.hashcash.org/
 type Hashcash struct {
 	// hash is the hashcash hash function.
 	// Currently, it is always sha1.

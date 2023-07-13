@@ -1,3 +1,4 @@
+// Package challenges contains the challenges storage in memory implementation.
 package challenges
 
 import (

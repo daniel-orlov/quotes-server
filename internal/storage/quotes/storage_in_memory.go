@@ -1,3 +1,4 @@
+// Package quotes contains the quotes storage in memory implementation.
 package quotes
 
 import (

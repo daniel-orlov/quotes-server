@@ -1,3 +1,4 @@
+// Package quotes contains the quotes service, that handles the business logic of the application.
 package quotes
 
 import (

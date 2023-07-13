@@ -1,3 +1,4 @@
+// Package http contains the HTTP transport for the quote server.
 package http
 
 import (

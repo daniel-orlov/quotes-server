@@ -1,3 +1,4 @@
+// Package quotes contains the http transport for the quotes service.
 package quotes
 
 import (

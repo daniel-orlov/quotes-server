@@ -1,3 +1,6 @@
+// Package pow contains the PoW service, that handles the logic of proof-of-work for the application.
+// It currently uses hashcash v1, but can be extended to support other PoW systems.
+// It stores the challenges in a store, that can be in memory, Redis, or any other storage.
 package pow
 
 import (

@@ -1,3 +1,6 @@
+// Package proofer provides a middleware that implements a proof of work challenge.
+// The middleware is used to prevent DoS attacks.
+// It requires the client to solve a proof of work challenge before the request is processed.
 package proofer
 
 import (

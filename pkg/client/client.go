@@ -1,3 +1,4 @@
+// Package client contains the quotes server client, configured with the provided config.
 package client
 
 import (

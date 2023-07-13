@@ -1,3 +1,4 @@
+// Package logging contains a concurrence-safe singleton logger, that could be used by any package.
 package logging
 
 import (
