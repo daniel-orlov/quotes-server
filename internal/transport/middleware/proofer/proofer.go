@@ -106,7 +106,9 @@ func (mw *Proofer) handleSolutionCheck(c *gin.Context, solution string) error {
 	// Handle error
 	if err != nil {
 		mw.logger.Error("failed to check solution", zap.Error(err))
-		return err
+
+		// not retuning error here, because in any case we want to try to send a new challenge
+		// regardless if the client sent an invalid solution, tried to reuse a solution or there simply was an error
 	}
 
 	// If solution is not valid, return error and a new challenge, abort request

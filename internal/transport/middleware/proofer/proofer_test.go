@@ -101,7 +101,7 @@ func TestProofer_Use(t *testing.T) {
 
 				// Assertions
 				assert.Equal(t, http.StatusInternalServerError, w.Code, "status code should be 500")
-				assert.Equal(t, "{\"error\":\"failed to check solution\"}", w.Body.String())
+				assert.Equal(t, "{\"error\":\"failed to get new challenge\"}{\"error\":\"failed to check solution\"}", w.Body.String())
 			})
 
 			t.Run("Incorrect solution, get back with a new one", func(t *testing.T) {
