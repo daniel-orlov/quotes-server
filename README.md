@@ -1,5 +1,13 @@
 # quotes-server
 
+Quotes server is the backend part of the test assignment solution for DDOS-protected TCP server.
+
+For more details on the technical requirements, see [docs/000_Requirements.md](docs/000_Requirements.md).
+
+Please also
+consult [docs/003_Potential_questions_and_answers_to_them.md](docs/003_Potential_questions_and_answers_to_them.md) for
+additional information on the project.
+
 ## Requirements
 
 + [Go 1.19+](https://go.dev/dl/) installed (to run tests, start server or client without Docker)
@@ -9,6 +17,39 @@
 + [GolangCI-Lint](https://golangci-lint.run/usage/install/) installed (to run linter)
 
 ## Getting started
+
+### Environment variables
+
+To avoid overcomplicating testing the solution of the project, I used envconfig with some reasonable defaults.
+You can find them in the [config/config.go](config/config.go) file for server and in
+the [pkg/client/config.go](pkg/client/config.go) file for client.
+
+If you would like to set them manually, you can do it via environment variables:
+
+### Server
+
+| Name                 | Description                               | Default Value | Possible Values                 |
+|----------------------|-------------------------------------------|---------------|---------------------------------|
+| LOG_LEVEL            | Log level to use                          | debug         | debug, info, warn, error, fatal |
+| LOG_FORMAT           | Log format to use                         | console       | console, json                   |
+| SERVER_PORT          | Port to listen on                         | 8080          | any port you find reasonable    |
+| RATELIMITER_RATE     | Rate at which requests are allowed        | second        | second, minute                  |
+| RATELIMITER_LIMIT    | Maximum number of requests allowed        | 5             |                                 |
+| RATELIMITER_KEY      | Key to use for the ratelimiter            | client_ip     | client_ip                       |
+| CHALLENGE_DIFFICULTY | Difficulty of the proof of work challenge | 20            | 1 to 30 (recommended)           |
+| SALT_LENGTH          | Length of the salt                        | 8             |                                 |
+
+### Client
+
+| Name                    | Description                               | Default Value     | Possible Values                                                  |
+|-------------------------|-------------------------------------------|-------------------|------------------------------------------------------------------|
+| LOG_LEVEL               | Log level to use                          | debug             | debug, info, warn, error, fatal                                  |
+| LOG_FORMAT              | Log format to use                         | console           | console, json                                                    |
+| SERVER_HOST             | Host of the server to connect to          | localhost         | wherever server is hosted                                        |
+| SERVER_PORT             | Port of the server to connect to          | 8080              | whichever port server is listebing on                            |
+| REQUEST_PATH            | Path of the request to send to the server | /v1/quotes/random | whichever endpoint you want to hit on server                     |
+| REQUEST_RATE_PER_SECOND | Number of requests per second to send     | 100               |                                                                  |
+| REQUEST_COUNT           | Number of requests to send to the server  | 0                 | 0 means "run indefinetily", any positive number would limit that |
 
 ### Start server and client via docker-compose:
 
@@ -35,6 +76,10 @@ make test
 ```
 
 ## Project structure
+
+The structure of the project is inspired by Standard Go Project Layout.
+For more information on the architectural thinking behind this structure,
+see [docs/002_Project_architecture.md](docs/002_Project_architecture.md).
 
 > / **quotes-server**
 >
@@ -86,3 +131,8 @@ make test
 ## More information
 
 For more information, please, refer to /docs directory.
+
+## Infrastructure
+
+The project is hosted on GitHub and uses GitHub Actions for CI/CD pipelines.
+For actual infrastructure, see infrastructure repository - [link, WIP](https://github.com/daniel-orlov/quotes-infra)

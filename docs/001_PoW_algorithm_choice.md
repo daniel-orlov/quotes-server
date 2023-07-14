@@ -37,5 +37,6 @@ community support make it a suitable choice. While Scrypt offers certain advanta
 of this project lean towards Hashcash as the optimal solution.
 
 ## References:
+
 - [Hashcash](http://hashcash.org/papers/hashcash.pdf)
 - [Scrypt](https://www.tarsnap.com/scrypt/scrypt.pdf)
