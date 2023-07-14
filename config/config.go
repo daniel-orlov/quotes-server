@@ -21,6 +21,8 @@ type Config struct {
 	}
 	// Server is the http server configuration.
 	Server struct {
+		// GinMode is the mode to run the server in.
+		GinMode string `envconfig:"GIN_MODE" default:"release"`
 		// Port is the port to listen on.
 		Port int `envconfig:"SERVER_PORT" default:"8080"`
 		// Meddlewares is the configuration for the middlewares.

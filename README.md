@@ -32,6 +32,7 @@ If you would like to set them manually, you can do it via environment variables:
 |----------------------|-------------------------------------------|---------------|---------------------------------|
 | LOG_LEVEL            | Log level to use                          | debug         | debug, info, warn, error, fatal |
 | LOG_FORMAT           | Log format to use                         | console       | console, json                   |
+| GIN_MODE             | Gin mode to use                           | release       | release, debug                  |
 | SERVER_PORT          | Port to listen on                         | 8080          | any port you find reasonable    |
 | RATELIMITER_RATE     | Rate at which requests are allowed        | second        | second, minute                  |
 | RATELIMITER_LIMIT    | Maximum number of requests allowed        | 5             |                                 |

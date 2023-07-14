@@ -27,17 +27,23 @@ func TestNewConfig_UsingDefaults(t *testing.T) {
 	assert.Equal(t, "second", cfg.Server.Middlewares.Ratelimiter.Rate.String())
 	assert.Equal(t, uint(5), cfg.Server.Middlewares.Ratelimiter.Limit)
 	assert.Equal(t, "client_ip", cfg.Server.Middlewares.Ratelimiter.Key.String())
+	assert.Equal(t, "release", cfg.Server.GinMode)
+	assert.Equal(t, 20, cfg.Server.Middlewares.Proofer.ChallengeDifficulty)
+	assert.Equal(t, 8, cfg.Server.Middlewares.Proofer.SaltLength)
 }
 
 func TestNewConfig_UsingEnvironmentVariables(t *testing.T) {
 	// Set environment variables
 	err := setEnvVars(map[string]string{
-		"LOG_LEVEL":         "info",
-		"LOG_FORMAT":        "json",
-		"SERVER_PORT":       "80",
-		"RATELIMITER_RATE":  "minute",
-		"RATELIMITER_LIMIT": "10",
-		"RATELIMITER_KEY":   "client_id",
+		"LOG_LEVEL":            "info",
+		"LOG_FORMAT":           "json",
+		"SERVER_PORT":          "80",
+		"RATELIMITER_RATE":     "minute",
+		"RATELIMITER_LIMIT":    "10",
+		"RATELIMITER_KEY":      "client_id",
+		"GIN_MODE":             "debug",
+		"CHALLENGE_DIFFICULTY": "10",
+		"SALT_LENGTH":          "4",
 	})
 	// Assert that no error was returned
 	assert.NoError(t, err)
@@ -58,6 +64,9 @@ func TestNewConfig_UsingEnvironmentVariables(t *testing.T) {
 	assert.Equal(t, "minute", cfg.Server.Middlewares.Ratelimiter.Rate.String())
 	assert.Equal(t, uint(10), cfg.Server.Middlewares.Ratelimiter.Limit)
 	assert.Equal(t, "client_id", cfg.Server.Middlewares.Ratelimiter.Key.String())
+	assert.Equal(t, "debug", cfg.Server.GinMode)
+	assert.Equal(t, 10, cfg.Server.Middlewares.Proofer.ChallengeDifficulty)
+	assert.Equal(t, 4, cfg.Server.Middlewares.Proofer.SaltLength)
 }
 
 // setEnvVars sets the given environment variables.
