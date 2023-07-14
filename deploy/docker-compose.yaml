@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: server.Dockerfile
+    environment:
+      SERVER_PORT: '8080'
+      LOG_LEVEL: 'debug'
+      LOG_FORMAT: 'console' # console or json
+      RATELIMITER_RATE: 'second' # second or minute
+      RATELIMITER_LIMIT: '10' # number of requests per rate
+      RATELIMITER_KEY: 'client_ip'
+      CHALLENGE_DIFFICULTY: '20' # number of leading zeros in the hash, 20 is a good value for testing
+      SALT_LENGTH: '8' # length of the salt in bytes
+    ports:
+      - '8080:8080'
+    image: danielorlov/quotes-server:latest
+    restart: 'no'
+
+  client:
+    build:
+      context: .
+      dockerfile: client.Dockerfile
+    environment:
+      LOG_LEVEL: 'debug'
+      LOG_FORMAT: 'console' # console or json
+      SERVER_HOST: "server"
+      SERVER_PORT: '8080'
+      REQEST_PATH: '/v1/quotes/random'
+      REQUEST_RATE_PER_SECOND: '100'
+      REQUEST_COUNT: '1000'
+    image: danielorlov/quotes-client:latest
+    restart: 'no'
+    depends_on:
+      - server
