@@ -16,8 +16,11 @@ additional information on the project.
 + [Go 1.19+](https://go.dev/dl/) installed (to run tests, start server or client without Docker)
 + [Docker](https://docs.docker.com/engine/install/) installed (to run docker)
 + [Docker Compose](https://docs.docker.com/compose/install/) installed (to run docker-compose)
-+ [GNU Make](https://www.gnu.org/software/make/) installed (to run Makefile)
 + [GolangCI-Lint](https://golangci-lint.run/usage/install/) installed (to run linter)
++ [GNU Make](https://www.gnu.org/software/make/) installed (to run Makefile)
+
+NB: make commands tested to work both on GNU Make 3.81 (comes with the latest macOS) and 4.4.1 (the latest version at
+the moment of writing).
 
 ## Getting started
 
