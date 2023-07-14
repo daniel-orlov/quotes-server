@@ -15,7 +15,7 @@ additional information on the project.
 
 + [Go 1.19+](https://go.dev/dl/) installed (to run tests, start server or client without Docker)
 + [Docker](https://docs.docker.com/engine/install/) installed (to run docker)
-+ [Docker Compose](https://docs.docker.com/compose/install/) installed (to run docker-compose)
++ [Docker Compose](https://docs.docker.com/compose/install/) installed (to run docker-compose), v2.0+ is required
 + [GolangCI-Lint](https://golangci-lint.run/usage/install/) installed (to run linter)
 + [GNU Make](https://www.gnu.org/software/make/) installed (to run Makefile)
 
