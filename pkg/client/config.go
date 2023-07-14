@@ -24,9 +24,11 @@ type Config struct {
 		ServerPort int `envconfig:"SERVER_PORT" default:"8080"`
 		// RequestPath is the path of request that client will send to server
 		RequestPath string `envconfig:"REQUEST_PATH" default:"/v1/quotes/random"`
-
 		// RequestRatePerSecond defines how many requests per second client will send to server
 		RequestRatePerSecond int `envconfig:"REQUEST_RATE_PER_SECOND" default:"100"`
+		// RequestCount defines how many requests client will send to server.
+		// If RequestCount is 0, client will send requests infinitely
+		RequestCount int `envconfig:"REQUEST_COUNT" default:"0"`
 	}
 }
 
