@@ -42,4 +42,7 @@ func main() {
 
 	// Run the client in a loop.
 	quotesClient.Run()
+
+	// Log successful client run.
+	logger.Info("client run completed")
 }
