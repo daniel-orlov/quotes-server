@@ -46,7 +46,9 @@ jobs:
           args: -v ./...
 
   test:
+    name: Test
     runs-on: ubuntu-latest
+    needs: lint
     steps:
       - uses: actions/checkout@v3
 
@@ -64,6 +66,7 @@ jobs:
   build_docker_server:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
+    needs: [ lint, test ]
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
@@ -97,6 +100,7 @@ jobs:
   build_docker_client:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
+    needs: [ lint, test ]
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
