@@ -115,7 +115,8 @@ see [docs/002_Project_architecture.md](docs/002_Project_architecture.md).
 ## Contributing
 
 I used [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages.
-I also recommend adhering to TDD (Red-Green-Refactor) principle when contributing.
+I also recommend adhering
+to [TDD (Red-Green-Refactor) principle](https://www.codecademy.com/article/tdd-red-green-refactor) when contributing.
 
 ### Linting
 
