@@ -9,7 +9,7 @@ Let me explain why and what it means in practice.
 
 ## 2. Architecture
 
-![Screenshot 2023-07-14 at 09.32.55.png](..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fgq%2F20h5x7y916g1x5f6kgmd34s40000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_gQUeXi%2FScreenshot%202023-07-14%20at%2009.32.55.png)
+![Architecture](architecture.png)
 
 This architecture is based on the idea of separation of concerns and single responsibility principle.
 There are 3 main layers (or tiers):
