@@ -92,7 +92,7 @@ My list of things to do would look like this (grouped by priority):
 
 It might be that I have already added that by the time you are reading this:
 
-+ Add more tests for the client (I think that it is not enough), especially integration tests.
++ Add more integration tests and client tests (I have already added a few, but I would like to add more)
 + Finish infrastructure setup (in another repo, since it is not a part of this
   project - [repo link](https://github.com/daniel-orlov/quotes-infra)
 
@@ -104,6 +104,8 @@ Will be adding in the future:
 + Add telemetry for more observability (currently there are logs, which are good, but not enough)
 + Add timeout middleware to server (to prevent hanging connections) — [this one](https://github.com/gin-contrib/timeout)
   seems nice
++ Make pipeline steps only run on relevant changes (currently all steps run on every change, which is not very
+  efficient)
 + Improve CI/CD pipeline by adding continuous deployment to Cloud Run.
 
 ## My question is not listed here, what should I do?

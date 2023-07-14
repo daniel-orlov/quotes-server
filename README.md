@@ -107,6 +107,7 @@ see [docs/002_Project_architecture.md](docs/002_Project_architecture.md).
 >
 > > / **pkg** - public packages
 >
+> > / **test/integration** - integration tests
 
 ## Contributing
 
