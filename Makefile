@@ -20,6 +20,16 @@ test: ## Run tests with coverage
 	go test -v ./... -coverprofile=$(repo_root)/test_coverage.out &&\
 	echo "total coverage: $$(go tool cover -func=$(repo_root)/test_coverage.out | grep total: | awk '{ print $$3}')"\
 
+.PHONY: stress-test
+stress-test: ## Run stress tests
+	@echo "> Running stress tests..."
+	cd deploy && \
+    	docker-compose up \
+    	--abort-on-container-exit \
+    	--force-recreate \
+    	--pull always \
+    	--scale client=10
+
 .PHONY: tidy
 tidy: ## Clean and format Go code
 	@echo "> Tidying..."
@@ -52,6 +62,7 @@ help: ## Show this help
 	@echo "make run-client - Run the client passing the arguments"
 	@echo "make start - Run the server and client using docker-compose"
 	@echo "make test - Run tests"
+	@echo "make stress-test - Run stress tests"
 	@echo "make tidy - Clean and format Go code"
 	@echo "make fmt - Format Go code"
 	@echo "make lint-host - Run golangci-lint directly on host"
