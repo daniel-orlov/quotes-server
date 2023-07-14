@@ -8,6 +8,11 @@ run-server: ## Run the server passing the arguments
 	@echo "> Running the server ..."
 	go run cmd/server/main.go $(ARGS)
 
+.PHONY: run-client
+run-client: ## Run the client passing the arguments
+	@echo "> Running the client ..."
+	go run cmd/client/main.go $(ARGS)
+
 .PHONY: test
 test: ## Run tests with coverage
 	@echo "> Testing..."
@@ -32,9 +37,20 @@ lint-host: ## Run golangci-lint directly on host
 	golangci-lint run -c .golangci.yml -v
 	@echo "> Done!"
 
+.PHONY: start
+start: ## Run the server and client
+	@echo "> Running the server and client ..."
+	cd deploy && \
+	docker-compose up \
+	--abort-on-container-exit \
+	--force-recreate \
+	--pull always
+
 .PHONY: help
 help: ## Show this help
-	@echo "make run - Run the application"
+	@echo "make run-server - Run the server passing the arguments"
+	@echo "make run-client - Run the client passing the arguments"
+	@echo "make start - Run the server and client using docker-compose"
 	@echo "make test - Run tests"
 	@echo "make tidy - Clean and format Go code"
 	@echo "make fmt - Format Go code"
