@@ -17,27 +17,38 @@ import (
 // Run runs the client.
 func (c *Client) Run() {
 	// Create the endpoint URL
-	endpoint := fmt.Sprintf(
-		"http://%s:%d%s",
-		c.cfg.Connection.ServerHost,
-		c.cfg.Connection.ServerPort,
-		c.cfg.Connection.RequestPath,
-	)
+	endpoint := c.buildEndpointURL()
 
-	// Run the client in a loop
-	for {
-		// Send a request to the endpoint
-		err := c.SendRequest(endpoint)
-		// Log any error
-		if err != nil {
+	// Create a function to send a request
+	sendRequest := func() {
+		if err := c.SendRequest(endpoint); err != nil {
 			c.logger.Error("sending request", zap.Error(err), zap.String("endpoint", endpoint))
 		}
+	}
 
-		// Sleep to control the request speed
-		timeToSleep := time.Second / time.Duration(c.cfg.Connection.RequestRatePerSecond)
-		c.logger.Debug("sleeping", zap.Float64("seconds", timeToSleep.Seconds()))
+	// Create a function to run the client in a loop
+	runClient := func() {
+		// Send a request
+		sendRequest()
 
-		time.Sleep(timeToSleep)
+		// Sleep to control the request rate
+		sleepDuration := time.Second / time.Duration(c.cfg.Connection.RequestRatePerSecond)
+		// Log the sleep duration
+		c.logger.Debug("sleeping", zap.Float64("seconds", sleepDuration.Seconds()))
+		// Sleep
+		time.Sleep(sleepDuration)
+	}
+
+	// If the request count is set, send that many requests
+	if c.cfg.Connection.RequestCount > 0 {
+		for i := 0; i < c.cfg.Connection.RequestCount; i++ {
+			runClient()
+		}
+	} else {
+		for {
+			// Otherwise, run the client in a loop indefinitely
+			runClient()
+		}
 	}
 }
 
@@ -81,6 +92,16 @@ func (c *Client) SendRequest(url string) error {
 	}
 
 	return nil
+}
+
+// buildEndpointURL builds the endpoint URL.
+func (c *Client) buildEndpointURL() string {
+	return fmt.Sprintf(
+		"http://%s:%d%s",
+		c.cfg.Connection.ServerHost,
+		c.cfg.Connection.ServerPort,
+		c.cfg.Connection.RequestPath,
+	)
 }
 
 // solveHashcashChallengeAndRetry solves the hashcash challenge and retries the request.
