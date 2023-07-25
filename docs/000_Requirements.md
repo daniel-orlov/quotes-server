@@ -1,8 +1,8 @@
 # Requirements
 
-## Design and implement “Word of Wisdom” tcp server.
+## Design and implement “Word of Wisdom” http server.
 
-- [x] TCP server should be protected from DDOS attacks with the Prof of
+- [x] HTTP server should be protected from DDOS attacks with the Prof of
   Work (https://en.wikipedia.org/wiki/Proof_of_work), the challenge-response protocol should be used.
 
 - [x] The choice of the POW algorithm should be explained.

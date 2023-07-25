@@ -22,7 +22,7 @@ This layered leverages the fact that each layer has its own responsibility
 and could be changed without affecting other layers.
 Layers are kept agnostic to each other by using interfaces.
 That allows to easily change implementation of some layer without affecting other layers, for example,
-If I wanted to introduce gRPC server instead of TCP server, I could easily do it by changing only transport layer.
+If I wanted to introduce gRPC server instead of HTTP server, I could easily do it by changing only transport layer.
 Similarly, if I wanted to change storage from in-memory to Redis, I could do it by changing only storage layer.
 This solid foundation provides a lot of extensibility and flexibility for the project.
 This also provided decent testability for the project, because I could easily mock any layer and test it in isolation.

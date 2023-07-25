@@ -3,7 +3,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/daniel-orlov/quotes-server)](https://goreportcard.com/report/github.com/daniel-orlov/quotes-server)
 ![Go Pipeline](https://github.com/daniel-orlov/quotes-server/actions/workflows/go.yaml/badge.svg)
 
-Quotes server is the backend part of the test assignment solution for DDOS-protected TCP server.
+Quotes server is the backend part of the test assignment solution for DDOS-protected HTTP server.
 
 For more details on the technical requirements, see [docs/000_Requirements.md](docs/000_Requirements.md).
 
