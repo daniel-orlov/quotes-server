@@ -3,12 +3,14 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/daniel-orlov/quotes-server)](https://goreportcard.com/report/github.com/daniel-orlov/quotes-server)
 ![Go Pipeline](https://github.com/daniel-orlov/quotes-server/actions/workflows/go.yaml/badge.svg)
 
-Quotes server is the backend part of the test assignment solution for DDOS-protected HTTP server.
+Quotes server is an example of how I normally build an HTTP server.
 
-For more details on the technical requirements, see [docs/000_Requirements.md](docs/000_Requirements.md).
+It started as a solution for a technical assignment and later turned into a showcase.
+Currently I enhance it ad-hoc, see the list of the project issues for the planned improvements and add your own to challenge me.
 
-Please also
-consult [docs/003_Potential_questions_and_answers_to_them.md](docs/003_Potential_questions_and_answers_to_them.md) for
+For more details on the initial technical requirements, see [docs/000_Requirements.md](docs/000_Requirements.md)
+
+Please also consult [docs/003_Potential_questions_and_answers_to_them.md](docs/003_Potential_questions_and_answers_to_them.md) for
 additional information on the project.
 
 ## Requirements
